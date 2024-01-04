@@ -22,22 +22,25 @@ Output: [0,1]
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        for(int i = 0; i < sizeof(nums); i++ ){
-            for(int j = 0; j < sizeof(nums); j++ ){
-                if(i != j){
-                    if(nums[i] + nums[j] == target){
-                        return vector<int> {i,j};
+        if(2 <= nums.size() <= pow(10,4) and pow(-10,9) <= target <= pow(10,9) ){
+            for(int i = 0; i < sizeof(nums); i++ ){
+                for(int j = 0; j < sizeof(nums); j++ ){
+                    if(i != j){
+                        if(nums[i] + nums[j] == target){
+                            return vector<int> {i,j};
+                        }
                     }
+
                 }
-            
             }
-       } 
-       return {};
+        } 
+        return {};
     }
 };
 
@@ -47,9 +50,9 @@ int main() {
     Solution index;
     vector<int> result = index.twoSum(myvector, target);
 
-    cout << "El resultado es: [";
+    cout << "El resultado es: [ ";
     for (int i : result) {
-        cout << i << ", ";
+        cout << i << " ";
     }
     cout << "]" ;
 
