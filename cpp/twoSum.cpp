@@ -28,34 +28,29 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        if(2 <= nums.size() <= pow(10,4) and pow(-10,9) <= target <= pow(10,9) ){
-            for(int i = 0; i < sizeof(nums); i++ ){
-                for(int j = 0; j < sizeof(nums); j++ ){
-                    if(i != j){
-                        if(nums[i] + nums[j] == target){
-                            return vector<int> {i,j};
-                        }
+        for(int i = 0; i < nums.size(); i++ ){
+            for(int j = 0; j < nums.size(); j++ ){
+                if(i != j){
+                    if(nums[i] + nums[j] == target){
+                        return vector<int> {i,j};
                     }
-
                 }
             }
-        } 
+        }
         return {};
     }
 };
 
 int main() {
-    vector <int> myvector = {1,2,3,4};
-    int target = 3;
+    vector <int> myvector = {3,3};
+    int target = 6;
     Solution index;
     vector<int> result = index.twoSum(myvector, target);
 
-    cout << "El resultado es: [ ";
-    for (int i : result) {
-        cout << i << " ";
+    cout << "El vector es: [";
+    for (int i = 0; i < result.size() - 1; ++i) {
+        cout << result[i] << ", ";
     }
-    cout << "]" ;
-
-
+    cout << result[result.size() - 1] << "]" << std::endl;
     return 0;
 }
