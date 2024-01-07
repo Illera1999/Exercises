@@ -35,28 +35,33 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* result = new ListNode();
-        ListNode* tail = result;
+        ListNode* aux = new ListNode(0);
+        ListNode* tail = aux;
         int ten = 0;
-        while(l1->next != nullptr and l2->next != nullptr){
-            int val = l1->val + l2->val + ten;
+        while(l1 != nullptr or l2 != nullptr or ten != 0){
+            int a = (l1 != nullptr) ? l1->val : 0;
+            int b = (l2 != nullptr) ? l2->val : 0;
+            int val = a + b + ten;
             if(val >= 10){
                 val -= 10;
                 ten = 1;
             }else{
                 ten = 0;
             }
-            ListNode* newNode = new ListNode();
-            tail->val = val;
+            ListNode* newNode = new ListNode(val);
             tail->next = newNode;
             tail = newNode;
 
-            l1=l1->next;
-            l2=l2->next;
+            if(l1 != nullptr){
+                l1=l1->next;
+            }
+            if(l2 != nullptr){
+                l2=l2->next;
+            }
         }
-
+        ListNode* result = aux->next;
+        delete aux;
         return result;
-
     }
 };
 
@@ -64,9 +69,11 @@ int main(){
     ListNode* node1 = new ListNode(1);
     ListNode* node2 = new ListNode(2);
     ListNode* node3 = new ListNode(3);
+    ListNode* node9 = new ListNode(3);
 
     node1->next = node2;
     node2->next = node3;
+    node3->next = node9;
 
     ListNode* node4 = new ListNode(1);
     ListNode* node5 = new ListNode(2);
@@ -74,18 +81,11 @@ int main(){
 
     node4->next = node5;
     node5->next = node6;
-    // ListNode* node1 = new ListNode(1);
-    // ListNode* node2 = new ListNode(0);
-    // node1->next = node2;
-    // ListNode* node4 = new ListNode(1);
-    // ListNode* node5 = new ListNode(0);
-    // node4->next = node5;
 
     Solution solution;
     ListNode* result = solution.addTwoNumbers(node1, node4);
     ListNode* print = result;
 
-    cout << result->val << endl;
     cout << "El resultado es: [ ";
     while(result->next != nullptr){
         cout << print->val << ", ";
