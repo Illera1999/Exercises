@@ -35,9 +35,27 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        while (l1->next != nullptr){
-            addTwoNumbers(ListNode* l1->next, ListNode* l2->next);
+        ListNode* result = new ListNode();
+        ListNode* tail = result;
+        int ten = 0;
+        while(l1->next != nullptr and l2->next != nullptr){
+            int val = l1->val + l2->val + ten;
+            if(val >= 10){
+                val -= 10;
+                ten = 1;
+            }else{
+                ten = 0;
+            }
+            ListNode* newNode = new ListNode();
+            tail->val = val;
+            tail->next = newNode;
+            tail = newNode;
+
+            l1=l1->next;
+            l2=l2->next;
         }
+
+        return result;
 
     }
 };
@@ -56,7 +74,24 @@ int main(){
 
     node4->next = node5;
     node5->next = node6;
+    // ListNode* node1 = new ListNode(1);
+    // ListNode* node2 = new ListNode(0);
+    // node1->next = node2;
+    // ListNode* node4 = new ListNode(1);
+    // ListNode* node5 = new ListNode(0);
+    // node4->next = node5;
 
     Solution solution;
     ListNode* result = solution.addTwoNumbers(node1, node4);
+    ListNode* print = result;
+
+    cout << result->val << endl;
+    cout << "El resultado es: [ ";
+    while(result->next != nullptr){
+        cout << print->val << ", ";
+        result = print->next;
+        print = result;
+    }
+    cout << result->val << "]" << endl;
+
 }
