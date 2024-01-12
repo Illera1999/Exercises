@@ -31,14 +31,11 @@ public:
         for(int i = 0; i < s.length(); i++){
             auto iter = aux.find(s[i]);
             if(iter != aux.end()){
-                i = aux[s[i]] + 1;
-                if(compresult > result){
+                i = aux[s[i]];
+                if(compresult >= result){
                     result = compresult;
-                    cout << result << endl;
+                    // cout << result << endl;
                     compresult = 0;
-                }
-                for (const auto& par : aux) {
-                    cout << "Clave: " << par.first << ", Valor: " << par.second << std::endl;
                 }
                 aux.clear();
             }else{
@@ -46,13 +43,22 @@ public:
                 compresult++;
             }
         }
+        if(compresult > result){
+            result = compresult;
+            // cout << result << endl;
+            compresult = 0;
+        }
+        // cout << "Cual es la substring:" << endl;
+        // for (const auto& par : aux) {
+        //     cout << "Clave: " << par.first << ", Valor: " << par.second << std::endl;
+        // }
         return result;
     }
 };
 
 int main(){
     Solution result;
-    int length = result.lengthOfLongestSubstring("abcabcbb");
-    // printf("Resultado es: %i\n",length);
-    cout << "El resultado es: " << length << endl;
+    cout << "El resultado de abcab: " << result.lengthOfLongestSubstring("abcab") << endl;
+    cout << "El resultado es bbbbb: " << result.lengthOfLongestSubstring("bbbbb") << endl;
+    cout << "El resultado es pwwkew: " << result.lengthOfLongestSubstring("pwwkew") << endl;
 }
